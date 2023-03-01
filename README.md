@@ -8,5 +8,5 @@
 3) Lancer Wamp ou Mamp 
 4) Aller à l'url -> localhost/phpmyadmin
 5) Créer une base de donnée 'miecolo'
-§) Aller à l'url -> localhost/miecolo
+6) Aller à l'url -> localhost/miecolo
 
