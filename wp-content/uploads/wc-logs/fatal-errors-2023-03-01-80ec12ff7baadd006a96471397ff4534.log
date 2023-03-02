@@ -1,0 +1,6 @@
+2023-03-01T23:09:31+00:00 CRITICAL Allowed memory size of 134217728 bytes exhausted (tried to allocate 131072 bytes) dans /Applications/MAMP/htdocs/miecolo/wp-content/plugins/woocommerce/includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php à la ligne 2411
+
+2023-03-01T23:15:15+00:00 CRITICAL Allowed memory size of 134217728 bytes exhausted (tried to allocate 32768 bytes) dans /Applications/MAMP/htdocs/miecolo/wp-content/plugins/woocommerce/includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php à la ligne 518
+
+2023-03-01T23:19:02+00:00 CRITICAL Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes) dans /Applications/MAMP/htdocs/miecolo/wp-content/plugins/woocommerce/includes/rest-api/Controllers/Version1/class-wc-rest-products-v1-controller.php à la ligne 2321
+
