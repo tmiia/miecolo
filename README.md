@@ -7,6 +7,6 @@
    Pour Mac, faite le dans le dossier Applications > Mamp > htdocs
 3) Lancer Wamp ou Mamp 
 4) Aller à l'url -> localhost/phpmyadmin
-5) Créer une base de donnée 'miecolo'
+5) Importer une base de donnée 'miecolo'
 6) Aller à l'url -> localhost/miecolo
 
