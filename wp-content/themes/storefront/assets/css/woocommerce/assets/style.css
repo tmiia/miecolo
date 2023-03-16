@@ -1,0 +1,194 @@
+
+/* VARIABLES & LAYOUT */
+
+:root {
+	--jaune-miel: #F2BD25;
+	--jaune-clair: #FFE9A9;
+	--gris-clair: #F1F1F5;
+	--gris-fonce: #6D685B;
+	--blanc: #FFFFFE;
+	--bleu: #6368ED;
+}
+
+.col-full{
+	max-width: 100%;
+	padding: 0, 60px;
+}
+
+hero{
+	display: flex;
+}
+
+h1, h2, h3, p, ul{
+	margin: 0;
+	padding: 0;
+	text-decoration: none !important;
+}
+
+h1{
+	font-size: 6em;
+}
+
+h2{
+	font-size: 3em;
+}
+
+h3{
+	font-size: 2em;
+	border-top: none !important;
+	margin-bottom: 2rem;
+	padding-top: 0 !important;
+}
+
+p, li{
+	font-size: 1em;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.cta-1{
+	display: inline-block;
+	text-decoration: none;
+	background-color: var(--jaune-miel);
+	padding: 1rem 2rem;
+	margin: 2rem 1rem;
+	border-radius: 10px;
+	color: var(--gris-fonce);
+	box-shadow: 2px 2px 7px 0px var(--gris-clair);
+	font-weight: bold;
+}
+
+section{
+	margin: 5rem 0;
+}
+
+
+/*HEADER NAV*/
+
+.nav-items li{
+    display: flex;
+}
+
+
+
+
+
+/* HOME PAGE*/
+
+
+/* PRESENTATION */
+
+.section-presentation{
+	display: flex;
+	justify-content: space-between;
+	background-image: url("http://localhost/miecolo/wp-content/uploads/2023/03/fondJaune.svg");
+	background-size: cover;
+	min-height: fit-content;
+}
+
+.section-presentation img{
+	width: 40vw;
+	margin-left: 5rem;
+	padding: 2rem 6em;
+}
+
+.presentation-title{
+	width: 50vw;
+	padding: 5rem;
+}
+
+/* FEATURES */
+
+.section-features{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.feature-title{
+	width: 100%;
+}
+
+.features{
+	display: grid;
+	grid-template-columns: repeat(2,1fr);
+  grid-gap: 2.5rem;
+}
+
+.feature{
+	display: flex;
+}
+
+.feature img{
+	padding: 1rem 1.25rem;
+	border-radius: 10px;
+	box-shadow: 2px 2px 7px 0px var(--gris-clair);
+	margin-right: 1.25rem;
+}
+
+.feature a{
+	display: block;
+	width: fit-content;
+}
+
+
+/*STORE*/
+.cards{
+	display: flex;
+	justify-content: center;
+}
+
+figure{
+	width: 30vw;
+	margin: 0 1rem;
+}
+
+figure img{
+	width: 100%;
+}
+
+figcaption{
+	background-color: var(--gris-clair);
+	border-radius: 10px;
+	position: relative;
+	top: -1rem;
+	padding-top: 1rem;
+}
+
+figcaption h3, figcaption p{
+	padding: 0 1rem;
+}
+
+.discover-store{
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	padding: 0;
+}
+
+
+/* FOOTER */
+
+footer{
+	display:flex;
+	align-items: flex-end;
+	background-image: url("http://localhost/miecolo/wp-content/uploads/2023/03/fondFooter.svg");
+	background-color: var(--blanc) !important;
+	min-height: 400px;
+	width: 100vw;
+	background-size: cover;
+}
+
+.footer-content{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+footer .reseaux{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1rem;
+}

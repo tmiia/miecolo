@@ -8444,3 +8444,8 @@ function wp_recursive_ksort( &$array ) {
 	}
 	ksort( $array );
 }
+
+add_action('wp_enqueue_scripts', 'custom_woocommerce_style', 9999);
+function custom_woocommerce_style() {
+	wp_enqueue_style('custom_woocommerce_style', get_template_directory_uri() . '/assets/css/woocommerce/assets/style.css', array(), '1.0.0', 'all');
+}
