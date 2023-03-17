@@ -13,6 +13,7 @@
  *
  * @since 2.1.0
  */
+
 define( 'DOING_AJAX', true );
 if ( ! defined( 'WP_ADMIN' ) ) {
 	define( 'WP_ADMIN', true );
@@ -156,6 +157,7 @@ $core_actions_post_deprecated = array(
 
 $core_actions_post = array_merge( $core_actions_post, $core_actions_post_deprecated );
 
+
 // Register core Ajax calls.
 if ( ! empty( $_GET['action'] ) && in_array( $_GET['action'], $core_actions_get, true ) ) {
 	add_action( 'wp_ajax_' . $_GET['action'], 'wp_ajax_' . str_replace( '-', '_', $_GET['action'] ), 1 );
@@ -169,8 +171,31 @@ add_action( 'wp_ajax_nopriv_generate-password', 'wp_ajax_nopriv_generate_passwor
 
 add_action( 'wp_ajax_nopriv_heartbeat', 'wp_ajax_nopriv_heartbeat', 1 );
 
+
 $action = $_REQUEST['action'];
 
+
+
+// JP START
+
+// register the ajax action for unauthenticated users
+add_action('wp_ajax_nopriv_jp_get_rank', 'jp_get_rank');
+
+// handle the ajax request
+function jp_get_rank() {
+    // $message_id `= $_REQUEST['message_id'];
+
+    // add your logic here...
+
+    // in the end, returns success json data
+    wp_send_json_success(array( 'success' => true ));
+
+    // or, on error, return error json data
+    //wp_send_json_error(array( 'success' => false ));
+}
+
+
+// JP END
 if ( is_user_logged_in() ) {
 	// If no action is registered, return a Bad Request response.
 	if ( ! has_action( "wp_ajax_{$action}" ) ) {
@@ -202,6 +227,8 @@ if ( is_user_logged_in() ) {
 	 */
 	do_action( "wp_ajax_nopriv_{$action}" );
 }
+
+
 
 // Default status.
 wp_die( '0' );

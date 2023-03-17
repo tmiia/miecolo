@@ -69,3 +69,19 @@ if ( version_compare( get_bloginfo( 'version' ), '4.7.3', '>=' ) && ( is_admin()
  * Note: Do not add any custom code here. Please use a custom plugin so that your customizations aren't lost during updates.
  * https://github.com/woocommerce/theme-customisations
  */
+
+
+
+ // ESSAI
+//  function wpb_adding_scripts() {
+//   wp_enqueue_script('game-script', get_template_directory_uri() . '/js/miecolo/game.js', array(), '1.0.0', true);
+// }
+// add_action( 'wp_enqueue_scripts', 'wpb_adding_scripts' );
+
+
+
+// JP START
+
+header("Access-Control-Allow-Origin: *");
+
+// JP END

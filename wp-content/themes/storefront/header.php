@@ -25,7 +25,7 @@
 
 <?php do_action( 'storefront_before_site' ); ?>
 
-<div id="page" class="hfeed site">
+<div id="page" class="hfeed site" style="padding: 0 2rem;">
 	<?php do_action( 'storefront_before_header' ); ?>
 
 	<header id="masthead" class="site-header" role="banner">
