@@ -179,13 +179,59 @@ $action = $_REQUEST['action'];
 // JP START
 
 // register the ajax action for unauthenticated users
-add_action('wp_ajax_nopriv_jp_get_rank', 'jp_get_rank');
+add_action('wp_ajax_nopriv_rush_simulator_get_rank', 'rush_simulator_get_rank');
 
 // handle the ajax request
-function jp_get_rank() {
+function rush_simulator_get_rank() {
     // $message_id `= $_REQUEST['message_id'];
 
     // add your logic here...
+    $email = $_POST['email'];
+    $score = $_POST['score'];
+    $servername = 'localhost';
+    $username = 'root';
+    $password = '';
+    $bdname = 'dialogues_du_21';
+
+    try{
+      $conn = new PDO("mysql:host=$servername;dbname=$bdname", $username, $password);
+      // en cas d'erreur PDO levera une Exception
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      //echo 'Connexion réussie </br>';
+    }catch (PDOException $e) {
+      die('Erreur de connexion à la base de données : ' . $e->getMessage());
+    }
+
+    $query = $conn->prepare('SELECT * FROM `rush_simulator_rank` WHERE `email` = ?');
+    $query->execute([$email]);
+    $row = $query->fetch();
+
+    if ($row) {
+      // L'email est déjà présent dans la table "rush_simulator_rank", mise à jour du score si nécessaire
+      if ($score > $row['score']) {
+        $query = $conn->prepare('UPDATE `rush_simulator_rank` SET `score` = ? WHERE `email` = ?');
+        $query->execute([$score, $email]);
+      }
+    } else {
+      // L'email n'est pas déjà présent dans la table "rush_simulator_rank", ajout d'une nouvelle entrée
+      $query = $conn->prepare('INSERT INTO `rush_simulator_rank` (`email`, `score`) VALUES (?, ?)');
+      $query->execute([$email, $score]);
+    }
+
+    // Récupération des éléments triés par score dans l'ordre décroissant
+    $query2 = $conn->prepare('SELECT * FROM `rush_simulator_rank` ORDER BY `score` DESC');
+    $query2->execute();
+
+    // Traitement des résultats
+    while ($row2 = $query2->fetch()) {
+      // Affichage ou traitement de chaque élément
+      echo $row2['email'] . ': ' . $row2['score'] . '<br>';
+    }
+
+
+    // fermeture de la connection
+    $conn = null;
+
 
     // in the end, returns success json data
     wp_send_json_success(array( 'success' => true ));
