@@ -773,7 +773,7 @@ if ( ! function_exists( 'storefront_single_product_pagination' ) ) {
 		}
 
 		?>
-		<nav class="storefront-product-pagination" aria-label="<?php esc_attr_e( 'More products', 'storefront' ); ?>">
+		<!-- <nav class="storefront-product-pagination" aria-label="<?php esc_attr_e( 'More products', 'storefront' ); ?>">
 			<?php if ( $previous_product ) : ?>
 				<a href="<?php echo esc_url( $previous_product->get_permalink() ); ?>" rel="prev">
 					<?php echo wp_kses_post( $previous_product->get_image() ); ?>
@@ -787,7 +787,7 @@ if ( ! function_exists( 'storefront_single_product_pagination' ) ) {
 					<span class="storefront-product-pagination__title"><?php echo wp_kses_post( $next_product->get_name() ); ?></span>
 				</a>
 			<?php endif; ?>
-		</nav><!-- .storefront-product-pagination -->
+		</nav>.storefront-product-pagination -->
 		<?php
 	}
 }
@@ -832,7 +832,7 @@ if ( ! function_exists( 'storefront_sticky_single_add_to_cart' ) ) {
 
 		wp_enqueue_script( 'storefront-sticky-add-to-cart' );
 		?>
-			<section class="storefront-sticky-add-to-cart">
+			<!-- <section class="storefront-sticky-add-to-cart">
 				<div class="col-full">
 					<div class="storefront-sticky-add-to-cart__content">
 						<?php echo wp_kses_post( woocommerce_get_product_thumbnail() ); ?>
@@ -845,7 +845,7 @@ if ( ! function_exists( 'storefront_sticky_single_add_to_cart' ) ) {
 							<?php echo esc_attr( $product->add_to_cart_text() ); ?>
 						</a>
 					</div>
-				</div>
+				</div> -->
 			</section><!-- .storefront-sticky-add-to-cart -->
 		<?php
 	}
@@ -921,7 +921,7 @@ if ( ! function_exists( 'storefront_woocommerce_brands_archive' ) ) {
 	 */
 	function storefront_woocommerce_brands_archive() {
 		if ( is_tax( 'product_brand' ) ) {
-			echo wp_kses_post( get_brand_thumbnail_image( get_queried_object() ) );
+			echo ("ne fonctionne pass");
 		}
 	}
 }

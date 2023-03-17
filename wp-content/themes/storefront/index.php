@@ -18,15 +18,16 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
 		<hero>
-			<div class="header-title">
+			<div class="hero-title">
 				<h1>Pas de Rush <span>Dans la ruche</span></h1>
 				<h3>Ton nouvel allié : la balance connectée</h3>
 				<p>Avec la balance connectée Miecolo, plus de stress, elle s’occupe de surveiller tes abeilles et te prévient au moindre danger.</p>
-				<a href="#" class="cta-1">Accéder à la boutique</a>
+				<a href="/miecolo/boutique" class="cta-1">Accéder à la boutique</a>
 			</div>
 
-			<div class="header-image">
+			<div class="hero-images">
 				<img src="wp-content\themes\storefront\assets\images\apiculteurHeader.png" alt="">
+				<a href="#"><img src="wp-content\themes\storefront\assets\images\icons\btnGame.svg" alt="code promo"></a>
 			</div>
 		</hero>
 
@@ -35,7 +36,7 @@ get_header(); ?>
 			<div class="presentation-title">
 				<h2>Premiers pas</h2>
 				<h3>Un outil en toute simplicité</h3>
-				<p>La balance connectée Miecolo est très simple d’utilisation : il suffit de l’installer sous la ruche, la mettre en marche et le tour est joué ! Pas besoin de mettre des piles car elle est autonome en énergie grâce à son panneau solaire intégré !</br></br>La balance connectée Miecolo est très simple d’utilisation : il suffit de l’installer sous la ruche, la mettre en marche et le tour est joué ! Pas besoin de mettre des piles car elle est autonome en énergie grâce à son panneau solaire intégré !</p>
+				<p>La balance connectée Miecolo est très simple d’utilisation : il suffit de l’installer sous la ruche, la mettre en marche et le tour est joué ! Pas besoin de mettre des piles car elle est autonome en énergie grâce à son panneau solaire intégré !</br></br>Vous n’avez plus qu’à installer l’application Miecolo pour récolter vos données et surveiller vos abeilles !</p>
 			</div>
 		</section>
 
@@ -78,14 +79,31 @@ get_header(); ?>
 				</div>
 			</div>
 
-			<a href="#" class="cta-1">Accéder à la boutique</a>
+			<a href="/miecolo/boutique" class="cta-1">Accéder à la boutique</a>
 		</section>
 
 		<section class="section-game">
 			<h2>Rush Simulator</h2>
-			<div class="game-presentation">
-				<img src="wp-content\themes\storefront\assets\images\illuRucheFermee.png" alt="">
+			<div class="visuel-game">
+				<div class="bulles">
+					<div class="bulle">
+						<p><b>Gère ton rucher de la meilleure manière possible</b></p>
+					</div>
+					<div class="bulle">
+						<p><b>Protège tes abeilles de tous les dangers !</b></p>
+					</div>
+				</div>
+				<img src="wp-content\themes\storefront\assets\images\illuRucheFermee.png" class="game-presentation" alt="">
+				<div class="bulles">
+					<div class="bulle">
+						<p><b>Récolte un maximum de miel dans le temps imparti !</b></p>
+					</div>
+					<div class="bulle">
+						<p><b>Place à la détente grâce aux balances connectées</b></p>
+					</div>
+				</div>
 			</div>
+
 			<a href="#" class="cta-1">Jouer</a>
 			<h2>30% de réduction</br><span>à gagner !</span></h2>
 		</section>
@@ -101,12 +119,12 @@ get_header(); ?>
 					<figure>
 						<img src="wp-content\themes\storefront\assets\images\ruchePrincipale.png" alt="">
 						<figcaption>
-							<h3>La ruche connectée</h3>
+							<h3>La balance connectée</h3>
 							<p>Pour adopter son premier compagnon de route apicole technologique</p>
 
 							<div class="discover-store">
 								<p><b>Découvrir les ruches</b></p>
-								<a href="#"><img src="wp-content\themes\storefront\assets\images\icons\btnArrow.svg" alt=""></a>
+								<a href="/miecolo/boutique"><img src="wp-content\themes\storefront\assets\images\icons\btnArrow.svg" alt=""></a>
 							</div>
 						</figcaption>
 					</figure>
@@ -118,7 +136,7 @@ get_header(); ?>
 
 							<div class="discover-store">
 								<p><b>Découvrir les packs</b></p>
-								<a href="#"><img src="wp-content\themes\storefront\assets\images\icons\btnArrow.svg" alt=""></a>
+								<a href="/miecolo/boutique"><img src="wp-content\themes\storefront\assets\images\icons\btnArrow.svg" alt=""></a>
 							</div>
 						</figcaption>
 					</figure>

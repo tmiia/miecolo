@@ -38,15 +38,14 @@
 			<div class="contact-footer">
 				<h3>Contact</h3>
 				<ul>
-					<li>Tel : NUMERO</li>
+					<li>Tel : +33 6 67 07 11 05</li>
 					<li>Adresse : Bordeaux, 33000 France</li>
-					<li>Email : contact@contact.com</li>
-					<li>N° Siret : </li>
+					<li>Email : contact@miecolo.com</li>
+					<li>N° Siret : 123456789</li>
 				</ul>
 				<ul class="reseaux">
 					<li><img src="wp-content\themes\storefront\assets\images\icons\insta.svg" alt=""></li>
 					<li><img src="wp-content\themes\storefront\assets\images\icons\youtube.svg" alt=""></li>
-					<li><img src="wp-content\themes\storefront\assets\images\icons\twitter.svg" alt=""></li>
 					<li><img src="wp-content\themes\storefront\assets\images\icons\facebook.svg" alt=""></li>
 				</ul>
 			</div>

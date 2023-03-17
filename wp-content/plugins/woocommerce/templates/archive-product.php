@@ -29,69 +29,74 @@ get_header( 'shop' );
 do_action( 'woocommerce_before_main_content' );
 
 ?>
-<header class="woocommerce-products-header">
+<!-- <header class="woocommerce-products-header">
 	<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
-		<h1 class="woocommerce-products-header__title page-title">Les ruches connectées</h1>
+		<h1 class="woocommerce-products-header__title page-title"></h1>
 	<?php endif; ?>
+</header> -->
+
+<section class="produits">
+	<h2>Les balances connectées</h2>
+	<h3>Pour penser l’apiculture sans stress pour les apiculteurs débutants et les confirmés</h3>
+	<div class="cards">
+		<figure>
+			<img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\ruchePrincipale.png" alt="">
+			<figcaption>
+				<h3>La balance principale</h3>
+				<p>Balance connectée et autonome en énergie + abonnement de 3€ HT/ mois</p>
+
+				<div class="discover-store">
+					<p><b>265 € HT</b></p>
+					<a href="/miecolo/boutique/balance-principale"><img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\icons\btnArrow.svg" alt=""></a>
+				</div>
+			</figcaption>
+		</figure>
+		<figure>
+			<img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\rucheSecondaire.png" alt="">
+			<figcaption>
+				<h3>La balance secondaire</h3>
+				<p>Balance connectée et autonome en énergie à coupler avec une balance principale</p>
+
+				<div class="discover-store">
+					<p><b>225 € HT</b></p>
+					<a href="/miecolo/boutique/balance-secondaire"><img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\icons\btnArrow.svg" alt=""></a>
+				</div>
+			</figcaption>
+		</figure>
+	</div>
+
+	<h2>Les packs complets</h2>
+	<h3>Profite des tarifs avantageux des packs ruchers pour faire des économies !</h3>
+	<div class="cards">
+		<figure>
+			<img src="http://localhost/miecolo/wp-content/uploads/2023/03/packRucher1.png" alt="">
+			<figcaption>
+				<h3>Pack rucher</h3>
+				<p>1 balance principale et 2 balances secondaires + abonnement de 3€ HT/ mois</p>
+				<div class="discover-store">
+					<p><b>685 € HT</b></p>
+					<a href="/miecolo/boutique/pack-rucher"><img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\icons\btnArrow.svg" alt=""></a>
+				</div>
+			</figcaption>
+		</figure>
+		<figure>
+			<img src="http://localhost/miecolo/wp-content/uploads/2023/03/packRucher2-1.png" alt="">
+			<figcaption>
+				<h3>Pack double rucher</h3>
+				<p>2 balances principales et 4 balances secondaires + abonnement de 6€ HT/ mois</p>
+				<div class="discover-store">
+					<p><b>1310 € HT</b></p>
+					<a href="/miecolo/boutique/pack-double-rucher"><img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\icons\btnArrow.svg" alt=""></a>
+				</div>
+			</figcaption>
+		</figure>
+	</div>
+
+	<a href="/miecolo" class="cta-1">Retour à l'accueil</a>
+</section>
 
 
-</header>
+
 <?php
-if ( woocommerce_product_loop() ) {
-
-	/**
-	 * Hook: woocommerce_before_shop_loop.
-	 *
-	 * @hooked woocommerce_output_all_notices - 10
-	 * @hooked woocommerce_result_count - 20
-	 * @hooked woocommerce_catalog_ordering - 30
-	 */
-	do_action( 'woocommerce_before_shop_loop' );
-
-	woocommerce_product_loop_start();
-
-	if ( wc_get_loop_prop( 'total' ) ) {
-		while ( have_posts() ) {
-			the_post();
-
-			/**
-			 * Hook: woocommerce_shop_loop.
-			 */
-			do_action( 'woocommerce_shop_loop' );
-
-			wc_get_template_part( 'content', 'product' );
-		}
-	}
-
-	woocommerce_product_loop_end();
-
-	/**
-	 * Hook: woocommerce_after_shop_loop.
-	 *
-	 * @hooked woocommerce_pagination - 10
-	 */
-	do_action( 'woocommerce_after_shop_loop' );
-} else {
-	/**
-	 * Hook: woocommerce_no_products_found.
-	 *
-	 * @hooked wc_no_products_found - 10
-	 */
-	do_action( 'woocommerce_no_products_found' );
-}
-
-/**
- * Hook: woocommerce_after_main_content.
- *
- * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
- */
-do_action( 'woocommerce_after_main_content' );
-
-/**
- * Hook: woocommerce_sidebar.
- *
- * @hooked woocommerce_get_sidebar - 10
- */
-do_action( 'woocommerce_sidebar' );
 
 get_footer( 'shop' );

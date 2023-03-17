@@ -29,25 +29,25 @@
 	<?php do_action( 'storefront_before_header' ); ?>
 
 	<header id="masthead" class="site-header" role="banner">
-		<img src="http://localhost/miecolo/wp-content/uploads/2023/03/miecoloLogo.png" alt="">
+		<a href="/miecolo"><img src="http://localhost/miecolo/wp-content/uploads/2023/03/miecoloLogo.png" alt=""></a>
 		<nav>
 			<ul class="nav-items">
-				<li>
-					<img src="wp-content\themes\storefront\assets\images\icons\iconGame.svg" alt="">
+				<a href="#"><li>
+					<img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\icons\iconGame.svg" alt="">
 					<p>Jeu</p>
-				</li>
-				<li>
-					<img src="wp-content\themes\storefront\assets\images\icons\iconShop.svg" alt="">
+				</li></a>
+				<a href="/miecolo/boutique"><li>
+					<img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\icons\iconShop.svg" alt="">
 					<p>Boutique</p>
-				</li>
-				<li>
-					<img src="wp-content\themes\storefront\assets\images\icons\iconPanier.svg" alt="">
+				</li></a>
+				<a href="/miecolo/panier"><li>
+					<img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\icons\iconPanier.svg" alt="">
 					<p>Panier</p>
-				</li>
-				<li>
-					<img src="wp-content\themes\storefront\assets\images\icons\iconCompte.svg" alt="">
+				</li></a>
+				<a href="/miecolo/mon-compte"><li>
+					<img src="http://localhost/miecolo/wp-content\themes\storefront\assets\images\icons\iconCompte.svg" alt="">
 					<p>Compte</p>
-				</li>
+				</li></a>
 			</ul>
 		</nav>
 

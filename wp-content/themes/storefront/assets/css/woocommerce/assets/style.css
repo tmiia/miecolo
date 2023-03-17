@@ -1,3 +1,12 @@
+/* FONT */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@font-face {
+    font-family: Woodman;
+    src: url(wp-content\themes\storefront\assets\fonts\Woodman-HeavyGrunge.otf);
+    font-weight: bold;
+}
+
 
 /* VARIABLES & LAYOUT */
 
@@ -12,25 +21,30 @@
 
 .col-full{
 	max-width: 100%;
-	padding: 0, 60px;
-}
-
-hero{
-	display: flex;
+	padding: 0 3rem;
 }
 
 h1, h2, h3, p, ul{
 	margin: 0;
 	padding: 0;
 	text-decoration: none !important;
+	color: var(--gris-fonce);
+}
+
+h3, p, ul{
+	font-family: 'Poppins', sans-serif;
 }
 
 h1{
-	font-size: 6em;
+	font-size: 4.5em;
+	font-family: 'Woodman';
+	text-transform: uppercase;
 }
 
 h2{
 	font-size: 3em;
+	font-family: 'Woodman';
+	text-transform: uppercase;
 }
 
 h3{
@@ -65,11 +79,78 @@ section{
 }
 
 
+hero{
+	display: flex;
+}
+
+.hero-images{
+	align-items: end;
+}
+
+
+
 /*HEADER NAV*/
 
-.nav-items li{
+.site-header{
     display: flex;
+    justify-content: space-between;
+    margin: 2rem 3rem;
+    padding: 0;
+    border: none;
+    text-decoration: none;
 }
+
+.site-header::before, .site-header::after{
+    display: none;
+}
+
+.nav-items{
+    display: flex;
+    width: 20vw;
+    justify-content: space-between;
+}
+
+.nav-items li{
+    text-align: -webkit-center;
+}
+
+.nav-items ul:first-child{
+	color: var(--bleu);
+}
+
+
+/* BOUTIQUE */
+
+.produits{
+    margin: 0;
+    display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+figure img{
+	border-radius: 10px;
+}
+
+figcaption img{
+	border-radius: 0;
+}
+
+.produits h2, .produits h3{
+    width: 100%;
+}
+
+.produits a{
+	display: block;
+	width: fit-content;
+}
+
+.storefront-breadcrumb{
+    margin: 2rem 0;
+}
+
+
+/* SINGLE */
 
 
 
@@ -114,7 +195,7 @@ section{
 .features{
 	display: grid;
 	grid-template-columns: repeat(2,1fr);
-  grid-gap: 2.5rem;
+    grid-gap: 2.5rem;
 }
 
 .feature{
@@ -134,10 +215,71 @@ section{
 }
 
 
-/*STORE*/
+/* GAME PREVIEW */
+
+.section-game{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background-image: url("http://localhost/miecolo/wp-content/uploads/2023/03/fondSectionJeu.svg");
+	background-size: cover;
+	min-height: fit-content;
+	align-items: center;
+	padding: 0 -3rem;
+}
+
+.section-game h2{
+	font-family: 'Poppins', sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: var(--bleu);
+	text-align: end;
+}
+
+.section-game h2 span{
+	font-size: 2rem;
+	text-transform: lowercase;
+	vertical-align: top;
+}
+
+.section-game a{
+	font-size: 2rem;
+	text-transform: uppercase;
+	background-color: var(--bleu);
+	color: var(--blanc);
+}
+
+.visuel-game{
+	display: flex;
+}
+
+.bulles{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bulle{
+    align-items: center;
+    text-align: center;
+    display: flex;
+}
+
+.bulle::before{
+	background-image: url(http://localhost/miecolo/wp-content/uploads/2023/03/bulle.svg);
+	content: '';
+	background-size: 100% 100%;
+	height: 100%;
+    width: 100%;
+	position: relative;
+}
+
+/*BOUTIQUE PREVIEW */
+
 .cards{
 	display: flex;
 	justify-content: center;
+    margin-bottom: 5rem;
 }
 
 figure{
@@ -176,7 +318,7 @@ footer{
 	align-items: flex-end;
 	background-image: url("http://localhost/miecolo/wp-content/uploads/2023/03/fondFooter.svg");
 	background-color: var(--blanc) !important;
-	min-height: 400px;
+	min-height: 430px;
 	width: 100vw;
 	background-size: cover;
 }
@@ -185,10 +327,19 @@ footer{
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+    margin: 0 8rem;
+}
+
+footer h3{
+	color: var(--gris-fonce) !important;
 }
 
 footer .reseaux{
 	display: flex;
 	justify-content: space-between;
 	margin-top: 1rem;
+}
+
+.col-full::before, .col-full::after{
+    display: none;
 }
