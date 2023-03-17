@@ -87,19 +87,19 @@ get_header(); ?>
 			<div class="visuel-game">
 				<div class="bulles">
 					<div class="bulle">
-						<p><b>Gère ton rucher de la meilleure manière possible</b></p>
+						<p><img class="bulleHG" src="http://localhost/miecolo/wp-content/uploads/2023/03/bulle.svg" alt=""><b>Gère ton rucher de la meilleure </br>manière possible</b></p>
 					</div>
 					<div class="bulle">
-						<p><b>Protège tes abeilles de tous les dangers !</b></p>
+						<p><img class="bulleBG" src="http://localhost/miecolo/wp-content/uploads/2023/03/bulle.svg" alt=""><b>Protège tes abeilles de tous </br>les dangers !</b></p>
 					</div>
 				</div>
 				<img src="wp-content\themes\storefront\assets\images\illuRucheFermee.png" class="game-presentation" alt="">
 				<div class="bulles">
 					<div class="bulle">
-						<p><b>Récolte un maximum de miel dans le temps imparti !</b></p>
+						<p><img class="bulleHD" src="http://localhost/miecolo/wp-content/uploads/2023/03/bulle.svg" alt=""><b>Récolte un maximum de miel dans </br>le temps imparti !</b></p>
 					</div>
 					<div class="bulle">
-						<p><b>Place à la détente grâce aux balances connectées</b></p>
+						<p><img class="bulleBD"src="http://localhost/miecolo/wp-content/uploads/2023/03/bulle.svg" alt=""><b>Place à la détente grâce </br>aux balances connectées</b></p>
 					</div>
 				</div>
 			</div>
