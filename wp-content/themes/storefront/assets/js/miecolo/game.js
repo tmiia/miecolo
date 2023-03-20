@@ -1,9 +1,9 @@
 
 const listStates = ['harvest', 'threat'],
-      interactions = ['smoke', 'rain', 'harvest', 'repair'],
-      maxHives = 8,
-      listHives = [],
-      listInteractions = [];
+  interactions = ['smoke', 'rain', 'harvest', 'repair'],
+  maxHives = 8,
+  listHives = [],
+  listInteractions = [];
 
 
 let play = true,
@@ -11,28 +11,32 @@ let play = true,
     isScaleSelected = false,
     score = 0,
     isSmoke = false,
-    timeToGenerateHive = 20000,
-    timeToChangeState = 7000,
+    timeToGenerateHive = 10000,
+    timeToChangeState = 5000,
     nbHive = 0,
     winPoints = 300,
     lives = 3,
-    honeyPot = 0;
+    isAllHivesCreated = false,
+    honeyPot = 3;
+    chrono = 300000;
 
 let timer1,
-    timer2;
+  timer2;
 
-const actionBtn =  document.querySelectorAll(".game__action"),
-      scale = document.querySelector('.game__scale');
+const actionBtn = document.querySelectorAll(".game__action"),
+  scale = document.querySelector('.game__scale');
 
 const hiveTemplate = document.getElementById("template-hive"),
-      hiveContainer = document.querySelector(".game__hives-container");
+  hiveContainer = document.querySelector(".game__hives-container"),
+  lineTemplate = document.getElementById("result-item")
 
 let scoreInterface = document.querySelector("#score");
 let honeyPotInterface = document.querySelector('.honey-pot');
 // let hiveInfo = document.querySelectorAll('.hive-info');
 
+
 class Hive {
-  constructor(id){
+  constructor(id) {
     this.id = id;
     this.isActive = false,
     this.state = {
@@ -40,63 +44,73 @@ class Hive {
       name : null,
       startTime: null,
     },
-    this.timeLoose = 5000,
+    this.timeLoose = 4500,
     this.looseTimer = null,
     this.isDone = false,
     this.isDead = false,
     this.scale = false
   }
 
-  changeHiveState = function() {
-    if(!this.isActive) {
+  changeHiveState = function () {
+    if (!this.isActive) {
       this.isActive = true;
       // DONNE VALEUR STATE DE MANIÈRE ALÉATOIRE :
       this.state.type = listStates[Math.floor(Math.random() * listStates.length)];
       // MARQUE LA DATE DE REF DU CHANGEMENT D'ETAT
       this.state.startTime = new Date().getTime();
 
-      if(this.state.type === 'threat' ){
-        let sortedListInte = interactions.filter(interaction => interaction !== 'smoke' && interaction !== 'harvest');
-        this.state.name = sortedListInte[Math.floor(Math.random() * sortedListInte.length)];
-        console.log(this.state.name);
-      }
-      else{
-        console.log(this.state.type)
-      }
-
-      // TEST (A SUPP)
-      let hiveElColor = document.querySelector("[data-id='"+ this.id +"']");
-      let hives = document.querySelectorAll(".hives");
-      hives.forEach(hive =>{
-        hive.className = "hives";
-      })
-
-      if (this.state.type === 'harvest') {
-        hiveElColor.classList.add("harvest");
-      }
-      else{
-        if(this.state.name === 'rain'){
-          hiveElColor.classList.add("rain");
-        }
-        else{
-          hiveElColor.classList.add("repair");
-        }
-      }
-
-
       this.looseTimer = setTimeout(() => {
         if (this.isDone === false) {
-
+          console.log("une ruche de -");
           this.loose();
         }
         else{
 
           clearTimeout(this.looseTimer);
         }
-      }, 4000);
+      }, this.timeLoose);
+
+      if(this.state.type === 'threat' ){
+        let sortedListInte = interactions.filter(interaction => interaction !== 'smoke' && interaction !== 'harvest');
+        this.state.name = sortedListInte[Math.floor(Math.random() * sortedListInte.length)];
+
+      }
+      else{
+        console.log(this.state.type)
+      }
+
+      let hiveElColor = document.querySelector("[data-id='"+ this.id +"']");
+      let hives = document.querySelectorAll(".hives");
+      hives.forEach(hive => {
+        hive.className = "hives";
+        hive.querySelector('img').style.display = "none";
+
+      })
+
+      if (this.state.type === 'harvest') {
+        hiveElColor.classList.add("harvest");
+        hiveElColor.style.backgroundImage = "url('http://localhost/miecolo/wp-content/uploads/2023/03/ruche_mielAbeille.svg')";
+
+      }
+      else {
+        if (this.state.name === 'rain') {
+          hiveElColor.classList.add("rain");
+          hiveElColor.querySelector('img').src = "http://localhost/miecolo/wp-content/uploads/2023/03/pluie.svg";
+          hiveElColor.querySelector('img').style.display = "block";
+
+        }
+        else {
+          hiveElColor.classList.add("repair");
+          hiveElColor.querySelector('img').src = "http://localhost/miecolo/wp-content/uploads/2023/03/voleur.svg";
+          hiveElColor.querySelector('img').style.display = "block";
+        }
+      }
+
+
+
 
     }
-    else{
+    else {
 
       this.isActive = false;
       this.state.type = null;
@@ -104,21 +118,21 @@ class Hive {
     }
   };
 
-  checkHiveState = function() {
-    if(this.state.type === 'threat'){
-      if(this.state.name === 'rain'){
+  checkHiveState = function () {
+    if (this.state.type === 'threat') {
+      if (this.state.name === 'rain') {
         return 'rain'
       }
-      else{
+      else {
         return 'repair'
       }
     }
-    else if (this.state.type === 'harvest'){
+    else if (this.state.type === 'harvest') {
       return "harvest"
     }
   }
 
-  win = function(){
+  win = function () {
     const now = new Date().getTime();
 
 
@@ -126,53 +140,68 @@ class Hive {
     this.isActive = false;
     clearTimeout(this.looseTimer);
 
-
     // A SUPP
     document.querySelector("[data-id='"+ this.id +"']").className = "hives";
+    document.querySelector("[data-id='"+ this.id +"']").style.backgroundImage = "url('http://localhost/miecolo/wp-content/uploads/2023/03/ruche_normale.svg') "
+    console.log('je suis là')
+
 
     return (now - this.state.startTime) / 1000;
   }
 
-  loose = function() {
+  loose = function () {
     this.isActive = false;
-    lives --;
+    lives--;
+    document.getElementById('lives').innerText = `live : ${lives}`
     this.isDead = true;
+    document.querySelector("[data-id='"+ this.id +"']").style.backgroundImage = "url('http://localhost/miecolo/wp-content/uploads/2023/03/ruche_normale.svg')";
     destroyHive(this.id);
+
     if (lives < 1) {
       play = false;
-      clearInterval(timer1);
-      clearInterval(timer2);
-      alert("finito pipot !!!");
-      score = 0
-      clearInterval(scoreInterval);
+      endGame()
+
+      document.querySelector(".result").style.display = "block";
+      window.scrollTo(0, 300);
     }
   }
 
-  action = function (hive, hiveState){
+  action = function (hiveState){
+
+    let hiveElColor = document.querySelector("[data-id='"+ this.id +"']");
+
       if(hiveState === 'harvest'){
         if (interaction === 'smoke') {
           isSmoke = true;
           score += winPoints/2;
-          document.querySelector(`[data-id='${hive.id}']`).classList.add("smoked");
+          // document.querySelector(`[data-id='${hive.id}']`).classList.add("smoked");
+          hiveElColor.querySelector('img').src = "http://localhost/miecolo/wp-content/uploads/2023/03/smoke-inte.svg";
+          hiveElColor.style.backgroundImage = "url('http://localhost/miecolo/wp-content/uploads/2023/03/ruche_miel.svg')" ;
+          hiveElColor.querySelector('img').style.display = "block";
+
           updateScore();
         }
         else if (interaction === 'harvest'){
           if(isSmoke){
             isSmoke = false;
             updateHoneyPot();
-            let ratio = this.win(hive);
+            let ratio = this.win(selectHive(this.id));
             ratioScore(ratio);
-            console.log(ratio);
+
+
+            hiveElColor.querySelector('img').style.display = "none";
+            // hiveElColor.style.backgroundImage = "url('http://localhost/miecolo/wp-content/uploads/2023/03/ruche_normale.svg')" ;
             updateScore();
           }
           else{
-            // changeColorScore();
             if(score >= 150){
             score -= winPoints/2;
             }else{
               score=0;
             }
             updateScore();
+            clearTimeout(this.looseTimer);
+            this.loose();
           }
         }
         else{
@@ -182,19 +211,25 @@ class Hive {
             }else{
               score=0;
             }
-          updateScore();
-        }
+            updateScore();
+            clearTimeout(this.looseTimer);
+            this.loose();
 
-      }
-      else{
-        if (hiveState === 'rain' && interaction === hiveState){
-          ratio = this.win(hive);
+        }
+    }
+    else {
+      if (hiveState === 'rain' && interaction === hiveState){
+
+          let ratio = this.win(selectHive(this.id));
           ratioScore(ratio);
+          hiveElColor.querySelector('img').style.display = "none";
           updateScore();
         }
         else if (hiveState === 'repair' && interaction === hiveState){
-          ratio = this.win(hive);
+
+          let ratio = this.win(selectHive(this.id));
           ratioScore(ratio);
+          hiveElColor.querySelector('img').style.display = "none";
           updateScore();
         }
         else{
@@ -205,41 +240,52 @@ class Hive {
               score=0;
             }
           updateScore();
-
+          clearTimeout(this.looseTimer);
+          this.loose();
         }
       }
-  }
+    }
 };
+
 
 
 function game() {
   initHive();
   buyScale();
+  toggleScale();
+  document.querySelector('.btn-start').style.display = "none";
 
-    //score augmente toutes les secondes
+    chronoGlobal = setTimeout(() => {
+      endGame()
+      alert('fin du jeu')
+    }, chrono);
+
+
+    //score augmente tous les 7 millièmes de secondes
     scoreInterval = setInterval(() => {
       updateScore();
       score ++;
-    }, 1000);
+    }, 700);
 
+    // changement d'état des ruches
     timer1 = setInterval(() => {
       let min = Math.ceil(1);
       currentId = Math.round(Math.random() * (Math.floor(listHives.length) - min) + min)
       if(selectHive(currentId).isActive === false){
         selectHive(currentId).changeHiveState();
-        document.querySelector(`[data-id='${currentId}']`).querySelector('.hive-info-time').innerText = selectHive(currentId).timeLoose;
       }
     }, timeToChangeState);
 
+    // créer les ruches
     timer2 = setInterval(() => {
-      if (nbHive < maxHives) {
+      if (nbHive < maxHives && isAllHivesCreated === false) {
         createHive(listHives.length + 1);
       }
     }, timeToGenerateHive);
 
 
-  actionBtn.forEach(action =>{
-    action.addEventListener('click', ()=>{
+  actionBtn.forEach(action => {
+    action.addEventListener('click', () => {
       interaction = action.dataset['type'];
       cursorAnim(interaction);
     })
@@ -247,10 +293,9 @@ function game() {
 }
 
 
-
 function buyScale() {
-  scale.addEventListener('click', ()=>{
-    if(honeyPot >= 3){
+  scale.addEventListener('click', () => {
+    if (honeyPot >= 3) {
       honeyPot -= 3;
       isScaleSelected = true;
       interaction = null;
@@ -265,69 +310,72 @@ function toggleScale() {
 }
 
 function updateHoneyPot() {
-  honeyPot ++;
+  honeyPot++;
   toggleScale();
   honeyPotInterface.innerText = `HoneyPot : ${honeyPot}`;
 }
 
-function updateScore(){
+function updateScore() {
   scoreInterface.innerHTML = `Score : ${score}`;
-
 }
 
-function ratioScore(ratio){
-  if(ratio < 2){
-    score += winPoints*2,5;
+function ratioScore(ratio) {
+  if (ratio < 2) {
+    score += winPoints * 2, 5;
     console.log('moins de 1 seconde');
   }
-  else if(2 <= ratio < 3){
-    score += winPoints*2;
+  else if (2 <= ratio < 3) {
+    score += winPoints * 2;
     console.log('moins de 3 secondes');
   }
-  else{
+  else {
     score += winPoints;
     console.log('plus de 3 secondes');
   }
 }
 
-// function changeColorScore(){
-//   scoreInterface.style.color = "red";
-//   colorScore = setTimeout(() => {
-//     scoreInterface.style.color = "black";
-//     console.log('mettre en noir');
-//   },1000);
-//   clearTimeout(colorScore);
-// }
-
 function createHive(newId) {
-  const newHive = hiveTemplate.content.firstElementChild.cloneNode(true);
-  newHive.className = "hives";
-  newHive.dataset.id = newId;
-  hiveContainer.appendChild(newHive);
-  nbHive ++;
+  if (isAllHivesCreated === false) {
 
-  const hive = new Hive(newId);
-  listHives.push(hive);
-
-  newHive.addEventListener('click', ()=>{
-    let currentHive = selectHive(parseInt(newHive.dataset['id']));
-    cursorAnim(null)
-    if (interaction != null && currentHive.isActive) {
-      currentHive.action(currentHive, currentHive.checkHiveState());
+    const newHive = hiveTemplate.content.firstElementChild.cloneNode(true);
+    newHive.className = "hives";
+    newHive.dataset.id = newId;
+    newHive.style.backgroundImage = "url('http://localhost/miecolo/wp-content/uploads/2023/03/ruche_normale.svg')";
+    newHive.style.backgroundRepeat = "no-repeat";
+    newHive.style.backgroundPosition = "center";
+    hiveContainer.appendChild(newHive);
+    nbHive ++;
+    if(nbHive === maxHives){
+      isAllHivesCreated = true;
     }
-    else if(isScaleSelected){
-      currentHive.scale = true;
-      toggleScale();
 
-      // A SUPP
-      newHive.classList.add('scale');
-      currentHive.timeLoose += 2000;
-    }
-  })
+
+    const hive = new Hive(newId);
+    listHives.push(hive);
+
+
+
+    newHive.addEventListener('click', ()=>{
+      let currentHive = selectHive(parseInt(newHive.dataset['id']));
+      cursorAnim(null)
+      if (interaction != null && currentHive.isActive) {
+        currentHive.action(currentHive.checkHiveState());
+      }
+      else if (isScaleSelected) {
+        currentHive.scale = true;
+        toggleScale();
+        isScaleSelected = false;
+        // A SUPP
+        newHive.classList.add('scale');
+        currentHive.timeLoose += 2000;
+      }
+    })
+  }
 }
 
 function destroyHive(id) {
   document.querySelector(`[data-id='${id}']`).classList.add("destroy");
+  console.log('ruche destroy');
 }
 
 function initHive() {
@@ -337,29 +385,75 @@ function initHive() {
 }
 
 function selectHive(id) {
-  for (var i = 0; i < listHives.length; i++){
-    if(listHives[i].id === id){
+  for (var i = 0; i < listHives.length; i++) {
+    if (listHives[i].id === id) {
       return listHives[i];
     }
   }
 }
 
-function cursorAnim(inteName){
+function cursorAnim(inteName) {
   document.querySelector(".game").className = "game";
   document.querySelector(".game").classList.add(inteName);
-  console.log(inteName)
   actionBtn.forEach(action => {
     const imgEl = action.querySelector('img');
     if (imgEl) {
       imgEl.style.visibility = "visible";
     }
   });
-  scale.style.visibility = "visible"
+  scale.querySelector('img').style.visibility = "visible";
   if(inteName != "scale" && inteName != null){
     document.querySelector(`[data-type='${inteName}']`).querySelector('img').style.visibility = "hidden";
   }
-  else if(inteName === 'scale'){
+  else if (inteName === 'scale') {
     console.log('cursor scale');
     scale.querySelector('img').style.visibility = "hidden";
   }
+}
+
+function endGame() {
+  clearInterval(timer1);
+  clearInterval(timer2);
+  clearInterval(scoreInterval);
+  clearInterval(chronoGlobal);
+}
+
+
+
+const emailInput = document.getElementById('email');
+const pseudoInput = document.getElementById('pseudo');
+function saveInfo() {
+  document.getElementById('score').value = score;
+  if(emailInput.value != '' && pseudoInput != ''){
+    let user = {
+      pseudo: pseudo.value,
+      email: emailInput.value
+    };
+
+    let userJSON = JSON.stringify(user);
+
+    localStorage.setItem("user", userJSON);
+
+    do_request();
+  }
+}
+
+
+function do_request() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const userScore = JSON.parse(localStorage.getItem('score'));
+  jQuery.ajax({
+    type: "GET",
+    url: "http://localhost/miecolo/wp-admin/admin-ajax.php",
+    data: {
+      action: 'rush_simulator_get_rank',
+      pseudo: user.pseudo,
+      email: user.email,
+      score: userScore
+    },
+    success: function (output) {
+      newLine.querySelector('span').innerText = output;
+    },
+    error : function(error){ console.log("output error=", error) }
+  });
 }

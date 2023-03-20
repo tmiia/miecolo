@@ -73,12 +73,10 @@ if ( version_compare( get_bloginfo( 'version' ), '4.7.3', '>=' ) && ( is_admin()
 
 
  // ESSAI
-//  function wpb_adding_scripts() {
-//   wp_enqueue_script('game-script', get_template_directory_uri() . '/js/miecolo/game.js', array(), '1.0.0', true);
-// }
-// add_action( 'wp_enqueue_scripts', 'wpb_adding_scripts' );
-
-
+ add_action( 'wp_enqueue_scripts', 'wpb_adding_scripts', 9999 );
+ function wpb_adding_scripts() {
+  wp_enqueue_script('game-script', get_template_directory_uri() . '/assets/js/miecolo/game.js', array(), '1.0.0', true);
+}
 
 // JP START
 

@@ -14,6 +14,7 @@
  * @since 2.1.0
  */
 
+
 define( 'DOING_AJAX', true );
 if ( ! defined( 'WP_ADMIN' ) ) {
 	define( 'WP_ADMIN', true );
@@ -179,69 +180,72 @@ $action = $_REQUEST['action'];
 // JP START
 
 // register the ajax action for unauthenticated users
-add_action('wp_ajax_nopriv_rush_simulator_get_rank', 'rush_simulator_get_rank');
+// add_action('wp_ajax_nopriv_jp_get_rank', 'jp_get_rank');
+add_action('wp_ajax_rush_simulator_get_rank', 'rush_simulator_get_rank');
 
 // handle the ajax request
 function rush_simulator_get_rank() {
     // $message_id `= $_REQUEST['message_id'];
 
-    // add your logic here...
-    $email = $_POST['email'];
-    $score = $_POST['score'];
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $bdname = 'dialogues_du_21';
+   // add your logic here...
+   $email = $_REQUEST['email'];
+   $pseudo = $_REQUEST['pseudo'];
+   $score = $_REQUEST['score'];
 
-    try{
-      $conn = new PDO("mysql:host=$servername;dbname=$bdname", $username, $password);
-      // en cas d'erreur PDO levera une Exception
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      //echo 'Connexion réussie </br>';
-    }catch (PDOException $e) {
-      die('Erreur de connexion à la base de données : ' . $e->getMessage());
-    }
+   $servername = 'localhost';
+   $username = 'root';
+   $password = 'root';
+   $bdname = 'miecolo';
 
-    $query = $conn->prepare('SELECT * FROM `rush_simulator_rank` WHERE `email` = ?');
-    $query->execute([$email]);
-    $row = $query->fetch();
+   try{
+     $conn = new PDO("mysql:host=$servername;dbname=$bdname", $username, $password);
+     // en cas d'erreur PDO levera une Exception
+     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //  echo 'Connexion réussie </br>';
 
-    if ($row) {
-      // L'email est déjà présent dans la table "rush_simulator_rank", mise à jour du score si nécessaire
-      if ($score > $row['score']) {
-        $query = $conn->prepare('UPDATE `rush_simulator_rank` SET `score` = ? WHERE `email` = ?');
-        $query->execute([$score, $email]);
-      }
-    } else {
-      // L'email n'est pas déjà présent dans la table "rush_simulator_rank", ajout d'une nouvelle entrée
-      $query = $conn->prepare('INSERT INTO `rush_simulator_rank` (`email`, `score`) VALUES (?, ?)');
-      $query->execute([$email, $score]);
-    }
+     $query = $conn->prepare('SELECT * FROM `rush_simulator_rank` WHERE `email` = ?');
+   $query->execute([$email]);
+   $row = $query->fetch();
 
-    // Récupération des éléments triés par score dans l'ordre décroissant
-    $query2 = $conn->prepare('SELECT * FROM `rush_simulator_rank` ORDER BY `score` DESC');
-    $query2->execute();
+   if ($row) {
+     // L'email est déjà présent dans la table "rush_simulator_rank", mise à jour du score si nécessaire
+     if ($score > $row['score']) {
+       $query = $conn->prepare('UPDATE `rush_simulator_rank` SET `score` = ? WHERE `email` = ?');
+       $query->execute([$score, $email]);
+     }
+   } else {
+     // L'email n'est pas déjà présent dans la table "rush_simulator_rank", ajout d'une nouvelle entrée
+     $query = $conn->prepare('INSERT INTO `rush_simulator_rank` (`pseudo`, `email`, `score`) VALUES (?, ?, ?)');
+     $query->execute([$pseudo, $email, $score]);
+   }
 
-    // Traitement des résultats
-    while ($row2 = $query2->fetch()) {
-      // Affichage ou traitement de chaque élément
-      echo $row2['email'] . ': ' . $row2['score'] . '<br>';
-    }
+   // Récupération des éléments triés par score dans l'ordre décroissant
+   $query2 = $conn->prepare('SELECT * FROM `rush_simulator_rank` ORDER BY `score` DESC');
+   $query2->execute();
 
+   $count = 1;
+   // Traitement des résultats
+   while ($row2 = $query2->fetch()) {
+     // Affichage ou traitement de chaque élément
+     echo $count . " -  ". $row2['pseudo'] . ': ' . $row2['score'] .'<br>';
 
-    // fermeture de la connection
-    $conn = null;
+     $count++;
+   }
 
 
-    // in the end, returns success json data
-    wp_send_json_success(array( 'success' => true ));
+   // fermeture de la connection
+   $conn = null;
 
-    // or, on error, return error json data
-    //wp_send_json_error(array( 'success' => false ));
+
+   }catch (PDOException $e) {
+     die('Erreur de connexion à la base de données : ' . $e->getMessage());
+   }
 }
 
 
+
 // JP END
+
 if ( is_user_logged_in() ) {
 	// If no action is registered, return a Bad Request response.
 	if ( ! has_action( "wp_ajax_{$action}" ) ) {
